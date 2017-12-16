@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+App -- Welcome
+{%  endblock %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>AppPy</h1>
+            <em>Flask application</em>.</p>
+        </header>
+        <section>
+        	<h2>Bookmarks</h2>
+        	{% if new_bookmark %}
+        	    <ul>
+        	    	{% for nbk in new_bookmark %}
+        	    	<li>{{ nbk.user }} has added <a href="{{ nbk.obj }}">{{ nbk.obj }}</a></li>
+        	    	{% endfor %}
+        	    </ul>
+        	    {% else %}
+        	    No Bookmarks
+        	{% endif %}    
+        </section>
+        <section>
+            <h2>What are they?</h2>
+            <p>A bookmark is a thin marker, commonly made of card, leather, or fabric, used to keep the reader's place in a book and to enable the reader to return to it with ease. Other frequently used materials for bookmarks are paper, metals like silver and brass, silk, wood, cord (sewing), and plastic. Many bookmarks can be clipped on a page with the aid of a page-flap.</p>
+        </section>
+
+    </article>
+{% endblock %}

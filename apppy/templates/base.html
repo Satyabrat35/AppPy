@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+        <script src="../static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <a href="{{ url_for('index') }}"><h1 class="title">AppPy</h1></a>
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('add') }}">Add URL</a></li>
+                        <li><a href="#">Sign up</a></li>
+                        <li><a href="#">Sign in</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+                <article class="flashes">
+                    {% with messages = get_flashed_messages() %}
+                     {% if messages %}
+                      <ul>
+                          {% for ms in messages %}
+                          <li>{{ ms }}</li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+                    {% endwith %}  
+                </article>
+                {%  block content %}
+                {%  endblock %}
+
+                {% block sidebar %}
+                    <aside>
+                        <h3>Historical Note</h3>
+                        <p>The first detached, and therefore collectible, bookmarkers began to appear in the 1850s. One of the first references to these is found in Mary Russell Mitford's Recollections of a Literary Life (1852): "I had no marker and the richly bound volume closed as if instinctively." Note the abbreviation of 'bookmarker' to 'marker'. The modern abbreviation is usually 'bookmark'. Historical bookmarks can be very valuable, and are sometimes collected along with other paper ephemera.</p>
+                    </aside>
+                {% endblock %}
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <p>App by Satyabrat</a> </p>
+                <p>See <a href="http://www.github.com/Satyabrat35">GitHub Repo</a></p>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery-1.11.0.min.js') }}"><\/script>')</script>
+
+    </body>
+</html>
