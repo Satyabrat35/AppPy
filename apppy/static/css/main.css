@@ -184,6 +184,18 @@ footer a:visited {
 
 }
 
+.errors , .errors input{
+    color: red;
+}
+tr.errors td ul{
+    margin-top: 0px;
+}
+tr.submit button{
+    margin-top: 30px;
+}
+input,button {
+    margin-left: 20px;
+}
 
 
 
