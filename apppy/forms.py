@@ -13,7 +13,7 @@ class BookmarkForm(Form):
         
         if not self.obj.data.startswith("http://") or\
             self.obj.data.startswith("https://"):
-            self.obj.data = "http://" + self.url.data
+            self.obj.data = "http://" + self.obj.data
 
         if not Form.validate(self):
             return False
