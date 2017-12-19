@@ -1,41 +1,40 @@
+import os
 from flask import Flask, render_template, url_for , request,redirect,flash
 from datetime import datetime
 #from logging import DEBUG
-from forms import BookmarkForm
 
+from flask_sqlalchemy import SQLAlchemy
+#from models import Bookmark //for the time being we can get away with circular import situations
+
+
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-#app.logger.setLevel(DEBUG)
 app.config['SECRET_KEY'] = '+\xaeOm\xa7D["\xff\x1b-\x83\xd7\x87\xd4\x8a\x8730\xa0\x00\x1fe\xe9'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir ,'apppy.db')
+db = SQLAlchemy(app)
+
+from forms import BookmarkForm
+import models
+# moved below db due to circular import in manage.py
 
 
-bookmark = []
-def store_bookmark(obj,description):
-	bookmark.append(dict(
-		obj = obj,
-		user = "erik",
-		date = 	datetime.utcnow(),
-		description = description
-		))
-
-def new_bookmark(num):
-	return sorted(bookmark,key=lambda bm: bm['date'] , reverse=True)[:num]
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html',new_bookmark=new_bookmark(5))
+    return render_template('index.html',new_bookmark=models.Bookmark.new(2))
 
 
 @app.route('/add',methods=['GET','POST'])
 def add():
-	form = BookmarkForm()
-	if form.validate_on_submit():
-		obj = form.obj.data
-		description = form.description.data
-		store_bookmark(obj,description)
-		flash("Bookmark Stored: {}".format(description))
-		return redirect(url_for('index'))
-	return render_template('add.html',form=form)	
+    form = BookmarkForm()
+    if form.validate_on_submit():
+        db.session.add(models.Bookmark(url=form.obj.data,description=form.description.data))
+        db.session.commit()
+        flash("Stored description {}".format(form.description.data))
+        return redirect(url_for('index'))
+    return render_template('add.html',form=form)
 
 
 @app.errorhandler(404)

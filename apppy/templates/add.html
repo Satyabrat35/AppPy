@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% from "form_macros.html" import render_field %}
 {% block title %}
 App -- Add a URL
 {%  endblock %}
@@ -10,24 +10,10 @@ App -- Add a URL
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <table>
-                <tr{% if form.obj.errors %} class="errors" {% endif %}>
-                    <td>Enter the Bookmark: </td>
-                    <td>{{ form.obj(size = 40)}}</td>
-                </tr>
-                <tr class="errors">
-                    <td></td>
-                    <td>
-                        <ul>
-                            {% for er in form.obj.errors %}
-                            <li><font color="red">{{ er }}</font></li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Optional Description: </td>
-                    <td>{{ form.description(size = 50) }}</td>
-                </tr>
+                {{ render_field(form.obj,size = 40) }}
+                {{ render_field(form.description,size = 50) }}
+
+                
                 <tr class="submit">
                     <td></td>
                     <td>

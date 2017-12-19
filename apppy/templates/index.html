@@ -15,7 +15,7 @@ App -- Welcome
         	{% if new_bookmark %}
         	    <ul>
         	    	{% for nbk in new_bookmark %}
-        	    	<li>{{ nbk.user }} has added <a href="{{ nbk.obj }}">{{ nbk.obj }}</a></li>
+        	    	<li>{{ nbk.user }} has added <a href="{{ nbk.url }}">{{ nbk.url }}</a></li>
         	    	{% endfor %}
         	    </ul>
         	    {% else %}
