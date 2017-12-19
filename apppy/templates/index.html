@@ -15,14 +15,17 @@ App -- Welcome
         	{% if new_bookmark %}
         	    <ul>
         	    	{% for nbk in new_bookmark %}
-        	    	<li>{{ nbk.user }} has added <a href="{{ nbk.url }}">{{ nbk.url }}</a></li>
+        	    	<li>{{ nbk.user.username }} has added  <a href="{{ nbk.url }}">{{ nbk.url }}</a> with a note {{ nbk.description }}  
+                    </br>
+                        Wanna see bookmark for a <a href="{{ url_for('user',username= nbk.user.username) }}">this user</a> ??</li>
+                    
         	    	{% endfor %}
         	    </ul>
         	    {% else %}
         	    No Bookmarks
         	{% endif %}    
         </section>
-        <section>
+        <section> 
             <h2>What are they?</h2>
             <p>A bookmark is a thin marker, commonly made of card, leather, or fabric, used to keep the reader's place in a book and to enable the reader to return to it with ease. Other frequently used materials for bookmarks are paper, metals like silver and brass, silk, wood, cord (sewing), and plastic. Many bookmarks can be clipped on a page with the aid of a page-flap.</p>
         </section>
