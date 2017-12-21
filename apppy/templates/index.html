@@ -17,7 +17,7 @@ App -- Welcome
         	    	{% for nbk in new_bookmark %}
         	    	<li>{{ nbk.user.username }} has added  <a href="{{ nbk.url }}">{{ nbk.url }}</a> with a note {{ nbk.description }}  
                     </br>
-                        Wanna see bookmark for a <a href="{{ url_for('user',username= nbk.user.username) }}">this user</a> ??</li>
+                        Wanna see bookmark for <a href="{{ url_for('user',username= nbk.user.username) }}">this user</a> ??</li>
                     
         	    	{% endfor %}
         	    </ul>

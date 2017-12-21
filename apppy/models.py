@@ -1,6 +1,7 @@
 from datetime import datetime
 from apppy import db
 from sqlalchemy import desc
+from flask_login import UserMixin
 
 class Bookmark(db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -17,7 +18,7 @@ class Bookmark(db.Model):
     def __repr__(self):
         return "<Bookmark '{}': '{}' >".format(self.description,self.url)
 
-class User(db.Model):
+class User(db.Model,UserMixin):
     id =db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(50),unique=True)
     email = db.Column(db.String(80),unique=True)
